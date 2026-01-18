@@ -6,11 +6,12 @@
                 <xsd:element name="course" maxOccurs="unbounded">
                     <xsd:complexType>
                         <xsd:sequence>
+                            <xsd:element name="id" type="xsd:int"/>
                             <xsd:element name="title" type="xsd:string"/>
                             <xsd:element name="description" type="xsd:string"/>
                             <xsd:element name="author" type="xsd:string"/>
+                            <xsd:element name="category" type="xsd:string" />
                         </xsd:sequence>
-                        <xsd:attribute name="id" type="xsd:int" use="required"/>
                     </xsd:complexType>
                 </xsd:element>
             </xsd:sequence>

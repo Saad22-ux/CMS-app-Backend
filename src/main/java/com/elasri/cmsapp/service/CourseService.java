@@ -65,13 +65,30 @@ public class CourseService {
         int newId = generateId(doc);
         course.setId(newId);
 
-        Element courseEl = doc.createElement("course");
-        courseEl.setAttribute("id", String.valueOf(course.getId()));
-        courseEl.setAttribute("category", course.getCategory());
 
-        append(doc, courseEl, "title", course.getTitle());
-        append(doc, courseEl, "author", course.getAuthor());
-        append(doc, courseEl, "description", course.getDescription());
+        Element courseEl = doc.createElement("course");
+
+        Element id = doc.createElement("id");
+        id.setTextContent(String.valueOf(course.getId()));
+
+        Element title = doc.createElement("title");
+        title.setTextContent(course.getTitle());
+
+        Element description = doc.createElement("description");
+        description.setTextContent(course.getDescription());
+
+        Element author = doc.createElement("author");
+        author.setTextContent(course.getAuthor());
+
+        Element category = doc.createElement("category");
+        category.setTextContent(course.getCategory());
+
+// ⚠️ ORDER IS IMPORTANT
+        courseEl.appendChild(id);
+        courseEl.appendChild(title);
+        courseEl.appendChild(description);
+        courseEl.appendChild(author);
+        courseEl.appendChild(category);
 
         root.appendChild(courseEl);
         xmlService.saveXml(doc, xmlPath);
@@ -146,15 +163,24 @@ public class CourseService {
     // ======================
     // UTILS
     // ======================
-    private Course mapToCourse(Element e) {
-        Course c = new Course();
-        c.setId(Integer.parseInt(e.getAttribute("id")));
-        c.setCategory(e.getAttribute("category"));
-        c.setTitle(e.getElementsByTagName("title").item(0).getTextContent());
-        c.setAuthor(e.getElementsByTagName("author").item(0).getTextContent());
-        c.setDescription(e.getElementsByTagName("description").item(0).getTextContent());
-        return c;
+    private Course mapToCourse(Element element) {
+        Course course = new Course();
+
+        String idText = getTagValue("id", element);
+
+        if (idText == null || idText.trim().isEmpty()) {
+            throw new RuntimeException("Course ID is missing in XML");
+        }
+
+        course.setId(Integer.parseInt(idText.trim()));
+        course.setTitle(getTagValue("title", element));
+        course.setDescription(getTagValue("description", element));
+        course.setAuthor(getTagValue("author", element));
+        course.setCategory(getTagValue("category", element));
+
+        return course;
     }
+
 
 
 
@@ -181,13 +207,14 @@ public class CourseService {
         return results;
     }
 
-    private String getTagValue(Element parent, String tag) {
-        NodeList nl = parent.getElementsByTagName(tag);
-        if (nl.getLength() > 0 && nl.item(0).getTextContent() != null) {
-            return nl.item(0).getTextContent();
+    private String getTagValue(String tag, Element element) {
+        NodeList nodeList = element.getElementsByTagName(tag);
+        if (nodeList.getLength() == 0) {
+            return null;
         }
-        return ""; // valeur par défaut si le tag est manquant
+        return nodeList.item(0).getTextContent();
     }
+
 
     public List<Map<String, String>> getAllProfessors() throws Exception {
         Document doc = xmlService.loadXml("src/main/resources/data/professors.xml");
@@ -198,7 +225,7 @@ public class CourseService {
             Element e = (Element) nodes.item(i);
             Map<String, String> prof = new HashMap<>();
             prof.put("id", e.getAttribute("id"));
-            prof.put("name", getTagValue(e, "name"));
+            prof.put("name", getTagValue("name", e));
             professors.add(prof);
         }
         return professors;
@@ -213,7 +240,7 @@ public class CourseService {
         Element e = (Element) nodes.item(0);
         Map<String, String> prof = new HashMap<>();
         prof.put("id", e.getAttribute("id"));
-        prof.put("name", getTagValue(e, "name"));
+        prof.put("name", getTagValue("name", e));
         return prof;
     }
 

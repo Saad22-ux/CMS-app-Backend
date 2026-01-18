@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <courses>
-    <course id="1" category="Web">
-        <title>XML CMS</title>
-        <author>Admin</author>
-        <description>Learn XML CMS</description>
-        <professorId>prof1</professorId>
-        <professorName>Dr. Laura Jiménez Castillo</professorName>
-    </course>
+   <course>
+      <id>1</id>
+      <title>Big Data</title>
+      <description>Hadoop and Spark</description>
+      <author>Prof. ELMADANI</author>
+      <category>Data Science</category>
+   </course>
+   <course>
+      <id>2</id>
+      <title>Spring boot</title>
+      <description>dkj zxposapapdss</description>
+      <author>Prof. EL Ouahidi</author>
+      <category>Web</category>
+   </course>
 </courses>

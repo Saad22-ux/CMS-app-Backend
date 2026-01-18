@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <users>
-    <user id="1" role="student">
-        <name>Ali Ben</name>
-        <email>ali@example.com</email>
-        <courses>
-            <courseRef id="1"/>
-        </courses>
-    </user>
-    <user id="2" role="student">
-        <name>Sara L.</name>
-        <email>sara@example.com</email>
-        <courses>
-            <courseRef id="1"/>
-            <courseRef id="2"/>
-        </courses>
-    </user>
-    <user id="3" role="visitor">
-        <name>John Doe</name>
-        <email>john@example.com</email>
-    </user>
+   <user id="1" role="student">
+      <name>Ali Ben</name>
+      <email>ali@example.com</email>
+      <courses>
+         <courseRef id="1"/>
+      </courses>
+   </user>
+   <user id="2" role="student">
+      <name>Sara L.</name>
+      <email>sara@example.com</email>
+      <courses>
+         <courseRef id="1"/>
+         <courseRef id="2"/>
+      </courses>
+   </user>
+   <user id="3" role="visitor">
+      <name>John Doe</name>
+      <email>john@example.com</email>
+   </user>
+   <user id="0" role="student">
+      <name>Saad Elasri</name>
+      <email>Saadelasri67@gmail.com</email>
+      <courses/>
+   </user>
 </users>
