@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<courses>
+    <course id="1" category="Web">
+        <title>XML CMS</title>
+        <author>Admin</author>
+        <description>Learn XML CMS</description>
+        <professorId>prof1</professorId>
+        <professorName>Dr. Laura Jiménez Castillo</professorName>
+    </course>
+</courses>
