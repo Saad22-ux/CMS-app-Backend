@@ -1,45 +1,53 @@
 package com.elasri.cmsapp.controller;
 
 import com.elasri.cmsapp.model.Professor;
-import com.elasri.cmsapp.service.CourseService;
 import com.elasri.cmsapp.service.ProfessorService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/professor")
+@RequestMapping("/professors")
+@CrossOrigin(origins = "http://localhost:3000")
 
 public class ProfessorController {
     private ProfessorService professorService;
-    private CourseService courseService;
 
-    public ProfessorController(ProfessorService professorService, CourseService courseService) {
+    public ProfessorController(ProfessorService professorService) {
         this.professorService = professorService;
-        this.courseService = courseService;
+    }
+
+    @GetMapping
+    public List<Professor> all() throws Exception {
+        return professorService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Map<String, String> getProfessor(@PathVariable String id) throws Exception {
-        return courseService.getProfessorById(id);
+    public Professor one(@PathVariable int id) throws Exception {
+        return professorService.getById(id);
     }
 
-    @PutMapping
-    public void updateProfessor(@RequestBody Professor professor)
+    @PostMapping
+    public void create(@RequestBody Professor p) throws Exception {
+        professorService.add(p);
+    }
+
+    @PutMapping("/{id}")
+    public boolean update(@PathVariable int id,
+                          @RequestBody Professor p)
             throws Exception {
-        professorService.updateProfessor(professor);
+        p.setId(id);
+        return professorService.update(p);
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable int id) throws Exception {
+        return professorService.delete(id);
     }
 
     @GetMapping("/html")
     public String html() throws Exception {
         return professorService.generateHtml();
-    }
-
-    @GetMapping
-    public List<Map<String, String>> getAllProfessors() throws Exception {
-        return courseService.getAllProfessors();
     }
 }

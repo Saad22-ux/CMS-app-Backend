@@ -13,6 +13,8 @@ import java.util.Map;
 @AllArgsConstructor
 
 public class Professor {
+    private int id;
+    private String name;
     private String bio;
     private List<String> skills;
     private Map<String, String> publications;

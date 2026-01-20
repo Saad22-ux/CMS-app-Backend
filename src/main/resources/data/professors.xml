@@ -1,2 +1,39 @@
-<?xml version="1.0"?>
-<professor></professor>
+<?xml version="1.0" encoding="UTF-8"?>
+<professors>
+   <professor id="3">
+      <name>Dr. Davina</name>
+      <bio>Experte Developement web et intelligence artificiel</bio>
+      <skills>
+         <skill>XML</skill>
+         <skill>Java</skill>
+         <skill>Php</skill>
+      </skills>
+      <publications>
+         <publication year="2025">XSLT et son role dans  transformation de XML en HTML</publication>
+      </publications>
+   </professor>
+   <professor id="2">
+      <name>Dr. Madani</name>
+      <bio>Expert Data Science</bio>
+      <skills>
+         <skill>Hadoop</skill>
+         <skill>Spark</skill>
+      </skills>
+      <publications>
+         <publication year="2025">Apache Flume</publication>
+      </publications>
+   </professor>
+   <professor id="3">
+      <name>Dr. El OUAHIDI</name>
+      <bio>Expert Developpement Web et Mobile</bio>
+      <skills>
+         <skill>Spring</skill>
+         <skill>React</skill>
+         <skill>Angular</skill>
+         <skill>Docker</skill>
+      </skills>
+      <publications>
+         <publication year="2025">Microservices in Spring Boot</publication>
+      </publications>
+   </professor>
+</professors>

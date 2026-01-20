@@ -3,37 +3,34 @@
 
     <xsl:template match="/">
         <html>
-            <head>
-                <title>Professor Profile</title>
-            </head>
             <body>
+                <h1>Professors</h1>
 
-                <h1>Professor Profile</h1>
+                <xsl:for-each select="professors/professor">
+                    <div style="border:1px solid gray; padding:10px; margin:10px;">
+                        <h2><xsl:value-of select="name"/></h2>
+                        <p><xsl:value-of select="bio"/></p>
 
-                <h2>Biography</h2>
-                <p>
-                    <xsl:value-of select="/professor/bio"/>
-                </p>
+                        <h4>Skills</h4>
+                        <ul>
+                            <xsl:for-each select="skills/skill">
+                                <li><xsl:value-of select="."/></li>
+                            </xsl:for-each>
+                        </ul>
 
-                <h2>Skills</h2>
-                <ul>
-                    <xsl:for-each select="/professor/skills/skill">
-                        <li><xsl:value-of select="."/></li>
-                    </xsl:for-each>
-                </ul>
-
-                <h2>Publications</h2>
-                <ul>
-                    <xsl:for-each select="/professor/publications/publication">
-                        <li>
-                            <xsl:value-of select="."/>
-                            (<xsl:value-of select="@year"/>)
-                        </li>
-                    </xsl:for-each>
-                </ul>
+                        <h4>Publications</h4>
+                        <ul>
+                            <xsl:for-each select="publications/publication">
+                                <li>
+                                    <xsl:value-of select="."/> -
+                                    <xsl:value-of select="@year"/>
+                                </li>
+                            </xsl:for-each>
+                        </ul>
+                    </div>
+                </xsl:for-each>
 
             </body>
         </html>
     </xsl:template>
-
 </xsl:stylesheet>
