@@ -12,17 +12,6 @@
          <publication year="2025">XSLT et son role dans  transformation de XML en HTML</publication>
       </publications>
    </professor>
-   <professor id="2">
-      <name>Dr. Madani</name>
-      <bio>Expert Data Science</bio>
-      <skills>
-         <skill>Hadoop</skill>
-         <skill>Spark</skill>
-      </skills>
-      <publications>
-         <publication year="2025">Apache Flume</publication>
-      </publications>
-   </professor>
    <professor id="3">
       <name>Dr. ELOUAHIDI</name>
       <bio>Expert Spring Boot</bio>
@@ -34,5 +23,25 @@
       <publications>
          <publication year="2025">Microservices avec Spring Boot</publication>
       </publications>
+   </professor>
+   <professor id="4">
+      <name>Dr. Madani</name>
+      <bio>Expert Data science</bio>
+      <skills>
+         <skill>Hadoop</skill>
+         <skill>Spark</skill>
+      </skills>
+      <publications>
+         <publication year="2025">Apache flume</publication>
+      </publications>
+   </professor>
+   <professor id="5">
+      <name>Dr. KHALIFI</name>
+      <bio>Professeur en AI</bio>
+      <skills>
+         <skill>Deep Learnin</skill>
+         <skill>Machine Learning</skill>
+      </skills>
+      <publications/>
    </professor>
 </professors>

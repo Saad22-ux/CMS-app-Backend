@@ -2,6 +2,7 @@ package com.elasri.cmsapp.controller;
 
 import com.elasri.cmsapp.model.Professor;
 import com.elasri.cmsapp.service.ProfessorService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,8 +30,14 @@ public class ProfessorController {
     }
 
     @PostMapping
-    public void create(@RequestBody Professor p) throws Exception {
-        professorService.add(p);
+    public ResponseEntity<Professor> createProfessor(@RequestBody Professor professor) {
+        try {
+            // add() retourne maintenant le Professor avec le bon ID
+            Professor created = professorService.add(professor);
+            return ResponseEntity.ok(created);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping("/{id}")
