@@ -4,14 +4,21 @@
       <id>1</id>
       <title>Big Data</title>
       <description>Hadoop and Spark</description>
-      <author>Prof. ELMADANI</author>
       <category>Data Science</category>
+      <authorId>2</authorId>
    </course>
    <course>
       <id>2</id>
-      <title>Spring boot</title>
-      <description>dkj zxposapapdss</description>
-      <author>Prof. EL Ouahidi</author>
+      <title>Microservices</title>
+      <description>Manipulations des Microservices avec Spring Boot</description>
       <category>Web</category>
+      <authorId>3</authorId>
+   </course>
+   <course>
+      <id>3</id>
+      <title>English</title>
+      <description>Learn how to speak english fluently </description>
+      <category>Soft Skills</category>
+      <authorId>1</authorId>
    </course>
 </courses>

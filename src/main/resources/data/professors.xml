@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <professors>
-   <professor id="3">
+   <professor id="1">
       <name>Dr. Davina</name>
       <bio>Experte Developement web et intelligence artificiel</bio>
       <skills>
@@ -24,16 +24,15 @@
       </publications>
    </professor>
    <professor id="3">
-      <name>Dr. El OUAHIDI</name>
-      <bio>Expert Developpement Web et Mobile</bio>
+      <name>Dr. ELOUAHIDI</name>
+      <bio>Expert Spring Boot</bio>
       <skills>
-         <skill>Spring</skill>
+         <skill>Java</skill>
          <skill>React</skill>
          <skill>Angular</skill>
-         <skill>Docker</skill>
       </skills>
       <publications>
-         <publication year="2025">Microservices in Spring Boot</publication>
+         <publication year="2025">Microservices avec Spring Boot</publication>
       </publications>
    </professor>
 </professors>

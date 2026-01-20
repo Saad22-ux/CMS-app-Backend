@@ -20,7 +20,7 @@ public class CourseController {
 
     @GetMapping
     public List<Course> getCourses() throws Exception {
-        return courseService.getAllCourses();
+        return courseService   .getAllCourses();
     }
 
     @GetMapping("/{id}")
@@ -58,6 +58,13 @@ public class CourseController {
     public List<Course> search(@RequestParam String q)
             throws Exception {
         return courseService.search(q);
+    }
+
+    @GetMapping("/filter")
+    public List<Course> filterByProfessor(@RequestParam int professorId) throws Exception {
+        return courseService.getAllCourses().stream()
+                .filter(c -> c.getAuthorId() == professorId)
+                .toList();
     }
 
 

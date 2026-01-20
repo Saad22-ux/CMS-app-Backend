@@ -41,7 +41,7 @@ public class CourseService {
     public Course getCourseById(int id) throws Exception {
 
         Document doc = xmlService.loadXml(xmlPath);
-        NodeList nodes = xpathService.evaluate(doc, "//course[@id='" + id + "']");
+        NodeList nodes = xpathService.evaluate(doc, "//course[id='" + id + "']");
 
         if (nodes.getLength() == 0) return null;
 
@@ -77,18 +77,18 @@ public class CourseService {
         Element description = doc.createElement("description");
         description.setTextContent(course.getDescription());
 
-        Element author = doc.createElement("author");
-        author.setTextContent(course.getAuthor());
-
         Element category = doc.createElement("category");
         category.setTextContent(course.getCategory());
+
+        Element authorIdEl = doc.createElement("authorId");
+        authorIdEl.setTextContent(String.valueOf(course.getAuthorId()));
 
 // ⚠️ ORDER IS IMPORTANT
         courseEl.appendChild(id);
         courseEl.appendChild(title);
         courseEl.appendChild(description);
-        courseEl.appendChild(author);
         courseEl.appendChild(category);
+        courseEl.appendChild(authorIdEl);
 
         root.appendChild(courseEl);
         xmlService.saveXml(doc, xmlPath);
@@ -103,23 +103,41 @@ public class CourseService {
     public boolean updateCourse(Course course) throws Exception {
 
         Document doc = xmlService.loadXml(xmlPath);
-        NodeList nodes = xpathService.evaluate(doc, "//course[@id='" + course.getId() + "']");
+        NodeList nodes = xpathService.evaluate(doc, "//course[id='" + course.getId() + "']");
 
         if (nodes.getLength() == 0) return false;
 
         Element e = (Element) nodes.item(0);
-        e.setAttribute("category", course.getCategory());
-        e.getElementsByTagName("title").item(0)
-                .setTextContent(course.getTitle());
-        e.getElementsByTagName("author").item(0)
-                .setTextContent(course.getAuthor());
-        e.getElementsByTagName("description").item(0)
-                .setTextContent(course.getDescription());
+
+        // Mise à jour des champs
+        e.getElementsByTagName("title").item(0).setTextContent(course.getTitle());
+        e.getElementsByTagName("description").item(0).setTextContent(course.getDescription());
+
+        // Category
+        NodeList catList = e.getElementsByTagName("category");
+        if (catList.getLength() > 0) {
+            catList.item(0).setTextContent(course.getCategory());
+        } else {
+            Element categoryEl = doc.createElement("category");
+            categoryEl.setTextContent(course.getCategory());
+            e.appendChild(categoryEl);
+        }
+
+        // authorId
+        NodeList authorList = e.getElementsByTagName("authorId");
+        if (authorList.getLength() > 0) {
+            authorList.item(0).setTextContent(String.valueOf(course.getAuthorId()));
+        } else {
+            Element authorEl = doc.createElement("authorId");
+            authorEl.setTextContent(String.valueOf(course.getAuthorId()));
+            e.appendChild(authorEl);
+        }
 
         xmlService.saveXml(doc, xmlPath);
         xmlService.validateXml(xmlPath, "src/main/resources/schemas/courses.xsd");
         return true;
     }
+
 
     // ======================
     // DELETE
@@ -127,7 +145,7 @@ public class CourseService {
     public boolean deleteCourse(int id) throws Exception {
 
         Document doc = xmlService.loadXml(xmlPath);
-        NodeList nodes = xpathService.evaluate(doc, "//course[@id='" + id + "']");
+        NodeList nodes = xpathService.evaluate(doc, "//course[id='" + id + "']");
 
         if (nodes.getLength() == 0) return false;
 
@@ -175,8 +193,13 @@ public class CourseService {
         course.setId(Integer.parseInt(idText.trim()));
         course.setTitle(getTagValue("title", element));
         course.setDescription(getTagValue("description", element));
-        course.setAuthor(getTagValue("author", element));
         course.setCategory(getTagValue("category", element));
+        String authorIdText = getTagValue("authorId", element);
+        if (authorIdText == null || authorIdText.trim().isEmpty()) {
+            throw new RuntimeException("Course authorId is missing for course " + course.getTitle());
+        }
+        course.setAuthorId(Integer.parseInt(authorIdText.trim()));
+
 
         return course;
     }

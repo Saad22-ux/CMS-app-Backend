@@ -16,8 +16,9 @@ import java.util.List;
 public class Course {
     private int id;
     private String title;
-    private String author;
     private String category;
     private String description;
+
+    private int authorId;
 
 }
